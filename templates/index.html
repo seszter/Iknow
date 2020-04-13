@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <title>
+      I know
+    </title>
+
+    <link rel="stylesheet" href="static/colors.css">
+    <link rel="stylesheet" href="static/stylish.css">
+
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="bigtitle"><span class='silver'> It's your turn: </span><span class={{next_player['pl_color']}}>{{next_player['pl_name']}}</span></h1>
+      <br/><br/>
+      <table id="game-grid" class="centered">
+          {% for row in grid_plus %}
+          {% set outer_loop = loop %}
+	<tr>
+	  {% for position in row %}
+	  <td style="border: 0.8em dashed #eee4f7;">
+	    {% if position!="empty" %}
+	    <div class="game-piece-blue" style="background-color:{{position}}">
+	        <h1 style="color:silver">+</h1>
+	    </div>
+	    {% else %}
+	    <div class="game-piece-empty">
+	        <h1 style="color:silver">+</h1>
+	      <form action="" method="post">
+	      <button name="play_plus" class="unbutton" type="submit" value="{{loop.index0}}"></button>
+	      </form>
+	    </div>
+	    {% endif %}
+	  </td>
+	  {% endfor %}
+	</tr>
+	{% endfor %}
+      </table>
+      <br/>
+      <table id="game-grid" class="centered">
+	{% for row in grid %}
+	{% set outer_loop = loop %}
+
+	<tr>
+	  {% for position in row %}
+	  {% set ng = loop.index0 %}
+	  <td>
+	    {% if position!="empty" %}
+	    <div class="game-piece-blue" style="background-color:{{position}}">
+	        <h1 style="color:silver">{{grid_nums[ng]}}</h1>
+	    </div>
+	    {% else %}
+	    <div class="game-piece-empty">
+            <h1 style="color:silver;padding:0;z-index:199;position:relative">{{grid_nums[ng]}}</h1>
+	      <form action="" method="post">
+		<!--<button name="play" class="unbutton" type="submit" value="{{outer_loop.index0}},{{loop.index0}}"></button> -->
+	      <button name="play" class="unbutton" style="z-index:100;position:relative" type="submit" value="{{loop.index0}}"></button>
+	      </form>
+
+	    </div>
+
+	    {% endif %}
+	  </td>
+	  {% endfor %}
+	</tr>
+	{% endfor %}
+      </table>
+      </br>
+      <table id="game-grid" class="centered">
+          {% for row in grid_minus %}
+          {% set outer_loop = loop %}
+	<tr>
+	  {% for position in row %}
+	  <td style="border: 0.8em dashed #eee4f7;">
+	    {% if position!="empty" %}
+	    <div class="game-piece-blue" style="background-color:{{position}}">
+	        <h1 style="color:silver">-</h1>
+	    </div>
+	    {% else %}
+	    <div class="game-piece-empty">
+	        <h1 style="color:silver">-</h1>
+	      <form action="" method="post">
+	      <button name="play_minus" class="unbutton" type="submit" value="{{loop.index0}}"></button>
+	      </form>
+	    </div>
+	    {% endif %}
+	  </td>
+	  {% endfor %}
+	</tr>
+	{% endfor %}
+      </table>
+      <br/>
+      <div class="top-padded">
+	<a href="evaluate">Evaluate</a>
+      </div>
+    {% for pl in players %}
+    <h2><span class={{pl['pl_color']}}>{{pl['pl_name']}}</span>
+        <span class='silver'> : {{pl['pl_score']}}</span></h2>
+    {% endfor %}
+      <div class="top-padded">
+	<a href="restart">Restart</a>
+
+      </div>
+    </div>
+  </body>
+
+</html>
