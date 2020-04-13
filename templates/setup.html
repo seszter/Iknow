@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <title>
+      I know
+    </title>
+
+    <link rel="stylesheet" href="static/colors.css">
+    <link rel="stylesheet" href="static/stylish.css">
+
+  </head>
+
+  <body>
+
+    <form action="" method="post" class="centered" style="width:400px;">
+      <fieldset id="color">
+	<legend>Who are you?</legend>
+	<input type="text" name="player_name" value="" > <br/>
+      </fieldset>
+
+      <fieldset>
+	<legend>Are you the last player?</legend>
+	<input type="radio" name="ready" value='0' checked="checked"> No <br/>
+	<input type="radio" name="ready" value='1' > Yes <br/>
+      </fieldset>
+      <input type="submit" value="Play!">
+    </form>
+{% for pl in players %}
+<h1 class="bigtitle"><span class={{pl['pl_color']}}>{{pl['pl_name']}}</span></h1>
+{% endfor %}
+  </body>
+
+</html>
